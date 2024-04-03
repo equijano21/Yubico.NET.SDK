@@ -145,7 +145,10 @@ namespace Yubico.Core.Devices.Hid.UnitTests
 
 #if Windows
         [Theory]
+#pragma warning disable CA1825 // Avoid zero-length array allocations
+        // The compiler mistakenly thinks that this somehow involves a zero-length array.
         [MemberData(nameof(GetTestData))]
+#pragma warning restore CA1825 // Avoid zero-length array allocations
         public void GetChar_GivenHidCode_ReturnsCorrectChar(KeyboardLayout layout, (char, byte)[] testData)
         {
             HidCodeTranslator hid = HidCodeTranslator.GetInstance(layout);
